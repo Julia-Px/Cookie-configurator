@@ -1,0 +1,27 @@
+
+
+<h3>Selected parts of cookie</h3>
+
+<ul>
+	<li>Base: {{cookie.base}} - {{pricify (find-price allBases cookie.base)}} PLN</li>
+	{{! Taki dziwny zapis: find-price bases base - funkcja i jej argumenty (w spodach znajdź spód) }}
+	{{#each cookie.addons}}
+		<li>
+			{{#if (not ../noDeleteBtn)}}{{! Dodatkowa informacja przekazywana do summary.hbs. Oznacza że w tym widoku dodatkowa informacja noDeletedBtn jest true. Stawiamy przed tym dwie kropki bo wychodzimy do kontekstu wyżej }}
+			
+			<a href='/configurator/delete-addon/{{this}}' class='btn btn-small'>Delete</a>
+		{{! nie możemy zrobić poprostu find-price addons this. W obiekcie w res.render mamy trzy pola: cookie, addons, bases. Jednak w obiekcie cookie też mamy pole addons. Dlatego musimy poprzez @root wskazać że chodzi nam o główny kontekst (addons w obiekcie res.render a nie w obiekcie cookie) }}
+			
+			{{/if}}
+
+			Addon: {{this}} - {{pricify (find-price @root.allAddons this)}} PLN </li>
+
+			
+	{{/each}}
+
+</ul>
+<p>
+
+	<strong>Total of {{pricify sum}}</strong>
+
+</p>

@@ -1,0 +1,30 @@
+<h1>Configure your cookie</h1>
+
+<h2>Select cookie base</h2>
+
+
+
+    {{#each allBases}}
+    <a href="/configurator/select-base/{{this.[0]}}" class="btn">Select {{this.[0]}} for {{this.[1]}} PLN</a>
+    {{!-- mówimy this.[0] - w ten sposób w handelbarsach pobieramy pierwszy element z tablicy. A chcemy pierwszy element z każdej tablicy tablic COOKIE_BASES i COOKIE_ADDONS. Drugi element to cena bazy: [[light, 1], [dark, 3]]  --}}
+    {{/each}}
+
+<h2>Select cookie addons</h2>
+
+    {{#each allAddons}}
+    
+    <a href="/configurator/select-addon/{{this.[0]}}" class="btn {{#if (isInArray @root.cookie.addons this.[0])}} btn-disabled{{/if}}{{!-- Jeżeli w obiekcie cookie, w tablicy addons jest element this[0] to zrób wyszarzony przycisk. Robimy ifa w klasie!!!. Oczywiście musimy powiedzieć że chodzi nam okontekst główny bo inaczej się program gubi--}}">Add {{this.[0]}} for {{this.[1]}} PLN</a>
+   {{!-- [[coconut, 1], [honey, 3]....]  --}}
+   
+    {{/each}}
+
+{{#if cookie.bgit commi}}
+{{>cookie-preview}}
+{{>addons}}
+<a href="/order/summary" class="btn btn-big"><i class="fa-solid fa-basket-shopping"></i>Buy now!</a>
+{{else}}
+<p>Please select base of your cookie to see it's preview and total price   {{#each allBases}}
+    <a href="/configurator/select-base/{{this.[0]}}" class="btn">Select {{this.[0]}} for {{this.[1]}} PLN</a>
+    {{/each}}</p>
+{{/if}}
+{{!-- Dołączamy partiala --}}

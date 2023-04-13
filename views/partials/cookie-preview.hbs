@@ -1,0 +1,5 @@
+{{#with cookie}}
+	{{! oznacza że chcemy pracować z obiektem cookie --> robimy desktrukturyzacje. Zatem nie musimy już zapisywać cookie.base lecz możemy poprostu robić samo base }}
+	<div class='cookie-preview' style="background: {{#each addons}}url('/assets/images/{{this}}.png'), {{/each}}url('/assets/images/empty-{{base}}.png')"></div>
+	{{! robimy style liniowo bo chcemy żeby się zmieniły dynamicznie a nie na stałe były przypisane w css }}
+{{/with}}
